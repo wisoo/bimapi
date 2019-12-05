@@ -28,7 +28,8 @@ createConnection().then(async connection => {
 }).catch(error => console.log(error));
 const express = require("express");
 const app = express();
-app.get("/url", (req, res, next) => {
+app.get("/ifcObject", (req, res, next) => {
+    console.log(req);
     res.json(["Tony","Lisa","Michael","Ginger","Food"]);
 });
 app.listen(3000, () => {
