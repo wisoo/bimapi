@@ -26,3 +26,8 @@ createConnection().then(async connection => {
     console.log("Here you can setup and run express/koa/any other framework.");
 
 }).catch(error => console.log(error));
+const express = require("express");
+const app = express();
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
