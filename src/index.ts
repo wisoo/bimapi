@@ -4,6 +4,8 @@ import {IFCObject} from "./entity/IFCObject";
 import {error} from "util";
 
 let activeConnection: Connection;
+
+
 createConnection().then(async connection => {
     activeConnection = connection;
     console.log('Inserting a new ifcObject into the database...');
@@ -26,9 +28,11 @@ createConnection().then(async connection => {
     console.log("Loaded users: ", ifcObjects);
 
 
+
 }).catch(error => console.log(error));
 const express = require("express");
 const app = express();
+app.use(express.json());
 app.get("/ifcObject/:oid", async (req, res, next) => {
     const oid = parseInt(req.params.oid);
     console.log(oid);
