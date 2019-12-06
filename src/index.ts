@@ -55,7 +55,12 @@ app.post("/ifcObject", async (req, res, next) => {
         .save(ifcObject)
         .then(ifcObject => {
             console.log("ifcObject has been saved. ifcObject id is", ifcObject.oid);
-        });
+            res.json({ Success : true });
+        }).catch(error => {
+            console.log(error);
+            res.json({ Success : false });
+    });
+
 });
 app.listen(3000, () => {
     console.log("Server running on port 3000");
