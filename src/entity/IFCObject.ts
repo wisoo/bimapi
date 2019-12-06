@@ -23,7 +23,7 @@ export class IFCObject {
     @Column({
         length: 500
     })
-    properties: string;
+    properties: object;
     constructor(){
         this.oid = 0;
         this.ifcId = "err";
@@ -34,6 +34,6 @@ export class IFCObject {
         this.sectionBatiment = "err";
         this.sectionEtage = "err";
         this.sectionPiece = "err";
-        this.properties = "{}";
+        this.properties = {};
     }
 }
