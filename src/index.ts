@@ -28,7 +28,7 @@ createConnection().then(async connection => {
 const express = require("express");
 const app = express();
 app.get("/ifcObject/:oid", (req, res, next) => {
-    const oid = parseInt(req.params.id, 10);
+    const oid = parseInt(req.params.oid);
     console.log(oid);
     res.json(["Tony","Lisa","Michael","Ginger","Food"]);
 });
