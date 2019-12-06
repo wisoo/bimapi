@@ -1,10 +1,10 @@
 import "reflect-metadata";
-import {Connection, createConnection} from "typeorm";
+import {Column, Connection, createConnection, PrimaryColumn} from "typeorm";
 import {IFCObject} from "./entity/IFCObject";
 
-let activeConnection: Connection
+let activeConnection: Connection;
 createConnection().then(async connection => {
-    activeConnection = connection
+    activeConnection = connection;
     console.log('Inserting a new ifcObject into the database...');
     const ifcObject = new IFCObject();
     ifcObject.ifcId = '123456';
@@ -35,6 +35,26 @@ app.get("/ifcObject/:oid", async (req, res, next) => {
     const ifcObject = await ifcObjectRepository.findOne({oid: oid});
     console.log(ifcObject);
     res.json(ifcObject);
+});
+
+app.post("/ifcObject", async (req, res, next) => {
+    let ifcObject = new IFCObject();
+    ifcObject.oid = parseInt(req.params.oid);
+    ifcObject.ifcId = req.params.ifcId;
+    ifcObject.name = req.params.name;
+    ifcObject.SectionNature = req.params.SectionNature;
+    ifcObject.sectionAnnexePiece = req.params.sectionAnnexePiece;
+    ifcObject.sectionAppartement = req.params.sectionAppartement;
+    ifcObject.sectionBatiment = req.params.sectionBatiment;
+    ifcObject.sectionEtage = req.params.sectionEtage;
+    ifcObject.sectionPiece = req.params.sectionPiece;
+    ifcObject.properties = req.params.properties;
+
+    activeConnection.manager
+        .save(ifcObject)
+        .then(ifcObject => {
+            console.log("ifcObject has been saved. ifcObject id is", ifcObject.oid);
+        });
 });
 app.listen(3000, () => {
     console.log("Server running on port 3000");
