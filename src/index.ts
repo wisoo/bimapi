@@ -30,7 +30,19 @@ const app = express();
 app.get("/ifcObject/:oid", (req, res, next) => {
     const oid = parseInt(req.params.oid);
     console.log(oid);
-    res.json(["Tony","Lisa","Michael","Ginger","Food"]);
+    createConnection(/*{
+              type: 'sqlite',
+              database: '../assets/database.db',
+              entities: [
+                IFCObject
+              ],
+              synchronize: true,
+              logging: false
+            }*/).then(async connection => {
+        const ifcObjectRepository = connection.getRepository(IFCObject);
+        const ifcObject = await ifcObjectRepository.findOne({oid: oid});
+        console.log(ifcObject);
+    }).catch(error => console.log(error));
 });
 app.listen(3000, () => {
     console.log("Server running on port 3000");
