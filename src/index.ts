@@ -1,9 +1,10 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
+import {Connection, createConnection} from "typeorm";
 import {IFCObject} from "./entity/IFCObject";
 
+let activeConnection: Connection
 createConnection().then(async connection => {
-
+    activeConnection = connection
     console.log('Inserting a new ifcObject into the database...');
     const ifcObject = new IFCObject();
     ifcObject.ifcId = '123456';
@@ -27,26 +28,13 @@ createConnection().then(async connection => {
 }).catch(error => console.log(error));
 const express = require("express");
 const app = express();
-app.get("/ifcObject/:oid", (req, res, next) => {
+app.get("/ifcObject/:oid", async (req, res, next) => {
     const oid = parseInt(req.params.oid);
     console.log(oid);
-    createConnection(/*{
-              type: 'sqlite',
-              database: '../assets/database.db',
-              entities: [
-                IFCObject
-              ],
-              synchronize: true,
-              logging: false
-            }*/).then(async connection => {
-        const ifcObjectRepository = connection.getRepository(IFCObject);
-        const ifcObject = await ifcObjectRepository.findOne({oid: oid});
-        console.log(ifcObject);
-        res.json(ifcObject);
-    }).catch(error => {
-        console.log(error);
-        res.json(null);
-    });
+    const ifcObjectRepository = activeConnection.getRepository(IFCObject);
+    const ifcObject = await ifcObjectRepository.findOne({oid: oid});
+    console.log(ifcObject);
+    res.json(ifcObject);
 });
 app.listen(3000, () => {
     console.log("Server running on port 3000");
