@@ -42,7 +42,11 @@ app.get("/ifcObject/:oid", (req, res, next) => {
         const ifcObjectRepository = connection.getRepository(IFCObject);
         const ifcObject = await ifcObjectRepository.findOne({oid: oid});
         console.log(ifcObject);
-    }).catch(error => console.log(error));
+        res(ifcObject);
+    }).catch(error => {
+        console.log(error);
+        res(null);
+    });
 });
 app.listen(3000, () => {
     console.log("Server running on port 3000");
