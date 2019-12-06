@@ -24,4 +24,16 @@ export class IFCObject {
         length: 500
     })
     properties: string;
+    constructor(){
+        this.oid = 0;
+        this.ifcId = "err";
+        this.name = "err";
+        this.SectionNature = "err";
+        this.sectionAnnexePiece = "err";
+        this.sectionAppartement = "err";
+        this.sectionBatiment = "err";
+        this.sectionEtage = "err";
+        this.sectionPiece = "err";
+        this.properties = "{}";
+    }
 }
