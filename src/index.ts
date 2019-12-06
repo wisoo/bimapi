@@ -40,16 +40,16 @@ app.get("/ifcObject/:oid", async (req, res, next) => {
 app.post("/ifcObject", async (req, res, next) => {
     console.log(req);
     let ifcObject = new IFCObject();
-    ifcObject.oid = parseInt(req.params.oid);
-    ifcObject.ifcId = req.params.ifcId;
-    ifcObject.name = req.params.name;
-    ifcObject.SectionNature = req.params.SectionNature;
-    ifcObject.sectionAnnexePiece = req.params.sectionAnnexePiece;
-    ifcObject.sectionAppartement = req.params.sectionAppartement;
-    ifcObject.sectionBatiment = req.params.sectionBatiment;
-    ifcObject.sectionEtage = req.params.sectionEtage;
-    ifcObject.sectionPiece = req.params.sectionPiece;
-    ifcObject.properties = req.params.properties;
+    ifcObject.oid = parseInt(req.query.oid);
+    ifcObject.ifcId = req.query.ifcId;
+    ifcObject.name = req.query.name;
+    ifcObject.SectionNature = req.query.SectionNature;
+    ifcObject.sectionAnnexePiece = req.query.sectionAnnexePiece;
+    ifcObject.sectionAppartement = req.query.sectionAppartement;
+    ifcObject.sectionBatiment = req.query.sectionBatiment;
+    ifcObject.sectionEtage = req.query.sectionEtage;
+    ifcObject.sectionPiece = req.query.sectionPiece;
+    ifcObject.properties = req.query.properties;
 
     activeConnection.manager
         .save(ifcObject)
