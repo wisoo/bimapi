@@ -38,6 +38,7 @@ app.get("/ifcObject/:oid", async (req, res, next) => {
 });
 
 app.post("/ifcObject", async (req, res, next) => {
+    console.log(req);
     let ifcObject = new IFCObject();
     ifcObject.oid = parseInt(req.params.oid);
     ifcObject.ifcId = req.params.ifcId;
