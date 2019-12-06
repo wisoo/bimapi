@@ -42,10 +42,10 @@ app.get("/ifcObject/:oid", (req, res, next) => {
         const ifcObjectRepository = connection.getRepository(IFCObject);
         const ifcObject = await ifcObjectRepository.findOne({oid: oid});
         console.log(ifcObject);
-        res(ifcObject);
+        res.json(ifcObject);
     }).catch(error => {
         console.log(error);
-        res(null);
+        res.json(null);
     });
 });
 app.listen(3000, () => {
