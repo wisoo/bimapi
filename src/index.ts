@@ -47,8 +47,9 @@ app.get("/ifcObject/:oid", async (req, res, next) => {
 });
 
 app.post("/ifcObject", async (req, res, next) => {
-    console.log(req.body);
+    console.log("BODYYYYYYYY\n\n", req.body, "\n\n");
     let ifcObject = new IFCObject();
+    console.log("DEFAULT IFCOBJECT", ifcObject);
     ifcObject.oid = parseInt(req.body.oid);
     ifcObject.ifcId = req.body.ifcId;
     ifcObject.name = req.body.name;
@@ -59,6 +60,7 @@ app.post("/ifcObject", async (req, res, next) => {
     ifcObject.sectionEtage = req.body.sectionEtage;
     ifcObject.sectionPiece = req.body.sectionPiece;
     ifcObject.properties = req.body.properties;
+    console.log("IFCOBJECT ONCE FILLED", ifcObject);
 
     activeConnection.manager
         .save(ifcObject)
