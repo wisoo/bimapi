@@ -23,13 +23,13 @@ createConnection().then(async connection => {
     const ifcObjects = await connection.manager.find(IFCObject);
     console.log("Loaded users: ", ifcObjects);
 
-    console.log("Here you can setup and run express/koa/any other framework.");
 
 }).catch(error => console.log(error));
 const express = require("express");
 const app = express();
-app.get("/ifcObject", (req, res, next) => {
-    console.log(req);
+app.get("/ifcObject/:oid", (req, res, next) => {
+    const oid = parseInt(req.params.id, 10);
+    console.log(oid);
     res.json(["Tony","Lisa","Michael","Ginger","Food"]);
 });
 app.listen(3000, () => {
