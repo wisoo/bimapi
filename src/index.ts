@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import {Column, Connection, createConnection, PrimaryColumn} from "typeorm";
 import {IFCObject} from "./entity/IFCObject";
+import {error} from "util";
 
 let activeConnection: Connection;
 createConnection().then(async connection => {
@@ -32,8 +33,12 @@ app.get("/ifcObject/:oid", async (req, res, next) => {
     const oid = parseInt(req.params.oid);
     console.log(oid);
     const ifcObjectRepository = activeConnection.getRepository(IFCObject);
-    const ifcObject = await ifcObjectRepository.findOne({oid: oid});
+    const ifcObject = await ifcObjectRepository.findOne({oid: oid}).catch(error => {
+        res.status(500);
+        res.json({Success: false, Error: error});
+    });
     console.log(ifcObject);
+    res.status(200);
     res.json(ifcObject);
 });
 
@@ -55,10 +60,12 @@ app.post("/ifcObject", async (req, res, next) => {
         .save(ifcObject)
         .then(ifcObject => {
             console.log("ifcObject has been saved. ifcObject id is", ifcObject.oid);
+            res.status(200);
             res.json({ Success : true });
         }).catch(error => {
             console.log(error);
-            res.json({ Success : false });
+            res.status(500);
+            res.json({ Success : false, Error : error });
     });
 
 });
