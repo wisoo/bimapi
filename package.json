@@ -10,7 +10,8 @@
    "dependencies": {
       "typeorm": "0.2.21",
       "reflect-metadata": "^0.1.10",
-      "mysql": "^2.14.1"
+      "mysql": "^2.14.1",
+      "express": "latest"
    },
    "scripts": {
       "start": "ts-node src/index.ts"
