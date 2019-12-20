@@ -1,6 +1,6 @@
 {
    "type": "mariadb",
-   "host": "localhost",
+   "host": "46.105.124.137",
    "port": 3306,
    "username": "myuser",
    "password": "pass",
