@@ -21,9 +21,9 @@ export class IFCObject {
     @Column()
     sectionPiece: string;
     @Column({
-        type: "text"
+        type: "json"
     })
-    properties: string;
+    properties: object;
     constructor(oid: number,
                 ifcId: string,
                 name: string,
@@ -34,7 +34,7 @@ export class IFCObject {
                 sectionEtage: string,
                 sectionPiece: string,
                 properties: object) {
-        this.properties = JSON.stringify(properties);
+        this.properties = properties;
         this.ifcId = ifcId;
         this.oid = oid;
         this.sectionPiece = sectionPiece;

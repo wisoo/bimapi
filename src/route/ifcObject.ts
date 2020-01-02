@@ -70,6 +70,7 @@ export async function ifcObject_update(req, res) {
       req.body.sectionEtage,
       req.body.sectionPiece,
       req.body.properties);
+    console.log(req.body.properties)
     await ifcObjectRepository.save(ifcObject);
     const result = await ifcObjectRepository.findOne(ifcObject.oid);
     res.json(result);
