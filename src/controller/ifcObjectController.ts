@@ -9,9 +9,6 @@ let ifcObjectController = require('../route/ifcObject');
 
 ifcObjectRouter.get('/', ifcObjectController.ifcObject_get_all);
 ifcObjectRouter.get('/:oid', ifcObjectController.ifcObject_get_one);
-ifcObjectRouter.get('/todo/:id', function (req, res) {
-  ifcObjectController.ifcObject_get_todos(req, res);
-});
 ifcObjectRouter.post('/:oid', function(req, res) {
   ifcObjectController.ifcObject_add(req, res);
 });

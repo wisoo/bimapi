@@ -13,6 +13,26 @@ export async function ifcObject_get_all(req, res) {
   res.json(ifcObjects);
 }
 
+export async function ifcObject_get_all_layers(req, res) {
+  const connectionManager = getConnection().manager;
+  const ifcObjects = await connectionManager.find(IFCObject, { select: ["calque"] }).catch(error => {
+    res.status(500);
+    res.json({Success: false, Error: error});
+  });
+  res.status(200);
+  res.json(ifcObjects);
+}
+
+export async function ifcObject_get_all_with_layer(req, res) {
+  const connectionManager = getConnection().manager;
+  const ifcObjects = await connectionManager.find(IFCObject, {calque: req.params.calque}).catch(error => {
+    res.status(500);
+    res.json({Success: false, Error: error});
+  });
+  res.status(200);
+  res.json(ifcObjects);
+}
+
 export async function ifcObject_get_one(req, res) {
   const connectionManager = getConnection().manager;
   const userRepository = connectionManager.getRepository(IFCObject);
@@ -41,6 +61,7 @@ export async function ifcObject_add(req, res) {
       req.body.sectionBatiment,
       req.body.sectionEtage,
       req.body.sectionPiece,
+      req.body.calque,
       req.body.properties);
 
     const createdIfcObject = await ifcObjectRepository.save(ifcObject);
@@ -69,6 +90,7 @@ export async function ifcObject_update(req, res) {
       req.body.sectionBatiment,
       req.body.sectionEtage,
       req.body.sectionPiece,
+      req.body.calque,
       req.body.properties);
     console.log(req.body.properties)
     await ifcObjectRepository.save(ifcObject);

@@ -20,6 +20,8 @@ export class IFCObject {
     sectionEtage: string;
     @Column()
     sectionPiece: string;
+    @Column()
+    calque: string;
     @Column({
         type: "json"
     })
@@ -33,6 +35,7 @@ export class IFCObject {
                 sectionBatiment: string,
                 sectionEtage: string,
                 sectionPiece: string,
+                calque: string,
                 properties: object) {
         this.properties = properties;
         this.ifcId = ifcId;
@@ -43,6 +46,7 @@ export class IFCObject {
         this.sectionBatiment = sectionBatiment;
         this.sectionAppartement = sectionAppartement;
         this.name = name;
+        this.calque = calque;
         this.sectionAnnexePiece = sectionAnnexePiece;
     }
 }
