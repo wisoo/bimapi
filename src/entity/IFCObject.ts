@@ -20,7 +20,7 @@ export class IFCObject {
     sectionEtage: string;
     @Column()
     sectionPiece: string;
-    @Column()
+    @Column({nullable: true})
     calque: string;
     @Column({
         type: "json"

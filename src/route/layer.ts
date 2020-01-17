@@ -4,11 +4,12 @@ import { getConnection } from 'typeorm';
 
 // Display list of all Authors.
 export async function layer_get_all(req, res) {
-    const connectionManager = getConnection().manager;
-    const layers = await connectionManager.find(IFCObject, { select: ["calque"] }).catch(error => {
-        res.status(500);
-        res.json({Success: false, Error: error});
-    });
+
+    const layers = await getConnection()
+        .createQueryBuilder(IFCObject, 't1')
+        .select('DISTINCT t1.calque')
+        .where('calque is not null')
+        .getRawMany();
     res.status(200);
     res.json(layers);
 }

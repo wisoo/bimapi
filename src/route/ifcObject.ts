@@ -51,6 +51,8 @@ export async function ifcObject_add(req, res) {
     const connectionManager = getConnection().manager;
     const ifcObjectRepository = connectionManager.getRepository(IFCObject);
     console.log("ifcObject_add", req.params.oid);
+    console.log(req.body.calque);
+    
     const ifcObject = new IFCObject(
       parseInt(req.params.oid, 10),
       req.body.ifcId,
