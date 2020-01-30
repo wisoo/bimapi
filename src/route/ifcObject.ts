@@ -37,6 +37,8 @@ export async function ifcObject_get_one(req, res) {
   const connectionManager = getConnection().manager;
   const userRepository = connectionManager.getRepository(IFCObject);
   const ifcObject = await userRepository.findOneOrFail({oid: parseInt(req.params.oid, 10)}).catch(error => {
+    console.log('params oid: ', req.params.oid);
+    console.log(error);
     res.status(500);
     res.json({Success: false, Error: error});
   });
