@@ -4,21 +4,21 @@ import { Entity, Column, PrimaryColumn } from 'typeorm';
 export class IFCObject {
     @PrimaryColumn()
     oid: number;
-    @Column()
+    @Column({nullable: true})
     ifcId: string;
-    @Column()
+    @Column({nullable: true})
     name: string;
-    @Column()
+    @Column({nullable: true})
     SectionNature: string;
-    @Column()
+    @Column({nullable: true})
     sectionAnnexePiece: string;
-    @Column()
+    @Column({nullable: true})
     sectionAppartement: string;
-    @Column()
+    @Column({nullable: true})
     sectionBatiment: string;
-    @Column()
+    @Column({nullable: true})
     sectionEtage: string;
-    @Column()
+    @Column({nullable: true})
     sectionPiece: string;
     @Column({nullable: true})
     calque: string;
